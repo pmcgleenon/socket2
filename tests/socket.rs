@@ -1505,6 +1505,13 @@ test!(IPv6 tclass_v6, set_tclass_v6(96));
 )))]
 test!(IPv6 recv_tclass_v6, set_recv_tclass_v6(true));
 
+#[cfg(all(feature = "all", target_os = "linux"))]
+test!(
+    #[ignore = "setting `IPV6_TRANSPARENT` requires the `CAP_NET_ADMIN` capability (works when running as root)"]
+    ip_transparent_v6,
+    set_ip_transparent_v6(true)
+);
+
 #[cfg(all(
     feature = "all",
     not(any(
